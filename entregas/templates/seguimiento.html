@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seguimiento #{{ pedido.id }} - Empresa de Entregas</title>
+    <!-- Tailwind CSS CDN para renderizado inmediato -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#f7f1e3] min-h-screen flex items-center justify-center p-6">
+    <div class="bg-white p-8 rounded-2xl shadow-xl w-full max-w-lg border-t-8 border-[#cd5c5c]">
+        <!-- Encabezado con estado -->
+        <div class="flex justify-between items-center mb-6 border-b pb-4">
+            <div>
+                <p class="text-xs font-bold text-gray-500 uppercase tracking-wider">Detalle del envío</p>
+                <h1 class="text-3xl font-black text-gray-900">Pedido #{{ pedido.id }}</h1>
+            </div>
+            <span class="bg-amber-100 text-amber-900 border border-amber-300 text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider">
+                ● {{ pedido.estado }}
+            </span>
+        </div>
+
+        <!-- Información del pedido -->
+        <div class="bg-stone-50 p-4 rounded-xl border border-stone-200 space-y-3 text-gray-700 mb-6">
+            <div class="flex justify-between border-b pb-2">
+                <span class="text-xs font-bold text-gray-500 uppercase">Origen</span>
+                <span class="font-bold text-gray-900">{{ pedido.origen }}</span>
+            </div>
+            <div class="flex justify-between border-b pb-2">
+                <span class="text-xs font-bold text-gray-500 uppercase">Destino</span>
+                <span class="font-bold text-gray-900">{{ pedido.destino }}</span>
+            </div>
+            <div class="flex justify-between border-b pb-2">
+                <span class="text-xs font-bold text-gray-500 uppercase">Peso</span>
+                <span class="font-bold text-gray-900">{{ pedido.peso_kg }} kg</span>
+            </div>
+            <div class="flex justify-between">
+                <span class="text-xs font-bold text-gray-500 uppercase">Tiempo estimado</span>
+                <span class="font-bold text-[#cd5c5c]">{{ pedido.eta }}</span>
+            </div>
+        </div>
+
+        <!-- Botón para regresar -->
+        <a href="/pedidos/" 
+           class="inline-block w-full text-center bg-gray-900 hover:bg-black text-white font-bold py-3 px-4 rounded-xl transition duration-200 uppercase tracking-wider text-sm shadow-md">
+            ← Registrar otro pedido
+        </a>
+    </div>
+</body>
+</html>
