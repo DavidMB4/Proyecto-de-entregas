@@ -7,4 +7,7 @@ urlpatterns = [
     
     # Esta ruta sirve para ver el seguimiento de un pedido por su id
     path('pedidos/<int:id>/', views.seguimiento_view, name='seguimiento'),
+
+    # El reporte usa el mismo servicio de consulta que el seguimiento.
+    path('pedidos/<int:id>/reporte/', views.reporte_pedido_view, name='reporte_pedido'),
 ]

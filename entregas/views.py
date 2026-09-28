@@ -1,8 +1,12 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.http import Http404
+from django.shortcuts import redirect, render
+
 from . import services
+from .models import Pedido
+
 
 def crear_pedido_view(request):
-    #Este es el POST para enviar el formulario de un pedido
+    # Este es el POST para enviar el formulario de un pedido.
     if request.method == 'POST':
         origen = request.POST.get('origen', '')
         destino = request.POST.get('destino', '')
@@ -16,14 +20,25 @@ def crear_pedido_view(request):
             urgente=urgente
         )
 
-        #Redirige a la vista de seguimiento
-        return redirect(f'/pedidos/{pedido.id}/')
+        # Patrón PRG: evita repetir el alta si se actualiza la página.
+        return redirect('seguimiento', id=pedido.id)
 
-    # Si es GET, le mostrmos e formulario en blanco
+    # Si es GET, mostramos el formulario en blanco.
     return render(request, 'crear_pedido.html')
 
 
 def seguimiento_view(request, id):
-    # Muestra la pantalla de seguimiento de un pedido
-    pedido = services.obtener_pedido(id)
-    return render(request, 'seguimiento.html', {'pedido': pedido})
+    try:
+        datos = services.obtener_datos_pedido(id)
+    except Pedido.DoesNotExist as error:
+        raise Http404("El pedido no existe") from error
+    return render(request, 'seguimiento.html', datos)
+
+
+def reporte_pedido_view(request, id):
+    """Reutiliza exactamente el mismo trámite que el seguimiento."""
+    try:
+        datos = services.obtener_datos_pedido(id)
+    except Pedido.DoesNotExist as error:
+        raise Http404("El pedido no existe") from error
+    return render(request, 'reporte_pedido.html', datos)

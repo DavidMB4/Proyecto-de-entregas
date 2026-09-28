@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporte del pedido #{{ pedido.id }}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-stone-100 min-h-screen p-6">
+    <main class="bg-white mx-auto max-w-2xl p-8 rounded-2xl shadow-lg">
+        <div class="flex justify-between items-start border-b pb-4 mb-6">
+            <div>
+                <p class="text-xs font-bold uppercase text-gray-500">Reporte de gerencia</p>
+                <h1 class="text-3xl font-black">Pedido #{{ pedido.id }}</h1>
+            </div>
+            <span class="font-bold text-[#cd5c5c]">{{ pedido.estado }}</span>
+        </div>
+
+        <dl class="grid grid-cols-2 gap-4 text-sm">
+            <div><dt class="font-bold text-gray-500">Origen</dt><dd>{{ mapa.origen }}</dd></div>
+            <div><dt class="font-bold text-gray-500">Destino</dt><dd>{{ mapa.destino }}</dd></div>
+            <div><dt class="font-bold text-gray-500">Peso</dt><dd>{{ pedido.peso_kg }} kg</dd></div>
+            <div><dt class="font-bold text-gray-500">ETA</dt><dd>{{ pedido.eta }}</dd></div>
+            <div><dt class="font-bold text-gray-500">Cobro</dt><dd>${{ cobro.monto }}</dd></div>
+            <div><dt class="font-bold text-gray-500">Estado del cobro</dt><dd>{{ cobro.estado }}</dd></div>
+        </dl>
+
+        <p class="mt-6 p-4 bg-stone-50 rounded-xl border">{{ mapa.descripcion }}</p>
+
+        <div class="mt-6 flex gap-3 print:hidden">
+            <a href="{% url 'seguimiento' pedido.id %}" class="bg-gray-900 text-white font-bold px-4 py-3 rounded-xl">← Seguimiento</a>
+            <button onclick="window.print()" class="bg-[#cd5c5c] text-white font-bold px-4 py-3 rounded-xl">Imprimir reporte</button>
+        </div>
+    </main>
+</body>
+</html>
