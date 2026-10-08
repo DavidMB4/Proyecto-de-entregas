@@ -1,0 +1,23 @@
+# Actividad individual — Lo que hay detrás de la implementación
+
+Nombre:
+Matrícula:
+Equipo:
+
+## A1
+
+(respuesta)
+
+## A2
+
+a) ...
+b) ...
+c) ...
+
+...
+
+## F1
+
+a) ...
+b) ...
+c) ...
